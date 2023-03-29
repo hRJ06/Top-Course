@@ -13,8 +13,6 @@ const Cards = ({courses,category}) => {
             })
             return allCourses; 
         }else{
-            console.log(courses);
-            console.log(category);
             return courses[category];
         }
     }
