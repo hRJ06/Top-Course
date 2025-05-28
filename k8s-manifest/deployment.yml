@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: top-course-deployment
+  namespace: top-course
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: top-course
+  template:
+    metadata:
+      labels:
+        app: top-course
+    spec:
+      containers:
+      - name: top-course
+        image: hrj06/top-course:latest
+        ports:
+        - containerPort: 80

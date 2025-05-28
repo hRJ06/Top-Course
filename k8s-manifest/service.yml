@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: top-course-svc
+  namespace: top-course
+spec:
+  selector:
+    app: top-course
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  type: ClusterIP
