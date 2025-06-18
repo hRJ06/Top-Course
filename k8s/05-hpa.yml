@@ -1,0 +1,22 @@
+kind: HorizontalPodAutoscaler
+apiVersion: autoscaling/v2
+
+metadata:
+  name: top-course-hpa
+  namespace: top-course
+
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: top-course-deployment
+
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu 
+        target: 
+          type: Utilization
+          averageUtilization: 2

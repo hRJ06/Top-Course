@@ -17,4 +17,12 @@ spec:
       - name: top-course
         image: hrj06/top-course:latest
         ports:
-        - containerPort: 80
+          - containerPort: 80
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          
+          limits:
+            cpu: 200m
+            memory: 512Mi
