@@ -24,30 +24,27 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - echo Packaging application into a zip file
-      - zip -r online-shop-app.zip * .[^.]* 
       - echo Building the Docker image
       - docker build -t $IMAGE_NAME:latest .
   
   post_build:
     commands:
       - echo Build completed on `date`
-      - echo Pushing the Docker image...
+      - echo Pushing the Docker image
       - docker push $IMAGE_NAME:latest
-      - echo Uploading zip file to S3 root location...
-      - aws s3 cp online-shop-app.zip s3://hindol-top-course/top-course-app/
-      - echo Writing image definitions file...
-      - printf '{"ImageURI":"%s", "Port":8000}' $IMAGE_NAME:latest > imageDefinitions.json
-      - cat imageDefinitions.json
+      - echo Writing image definitions file
+      - printf '[{"name":"top-course-container","imageUri":"%s"}]' $IMAGE_NAME:latest > imagedefinitions.json
+      - cat imagedefinitions.json
 
 artifacts:
   files:
     - '**/*'
   base-directory: '.'
   discard-paths: no
-  exclude-patterns:
+  exclude-paths:
     - 'node_modules/**/*'
     - '.git/**/*'
     - '.gitignore'
     - 'README.md'
     - 'package-lock.json'
+
